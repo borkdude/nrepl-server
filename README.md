@@ -110,3 +110,7 @@ Array[1]
 "done"
 ```
 
+## References
+
+- [nrepl-cljs](https://github.com/djblue/nrepl-cljs)
+- [ogion](https://gitlab.com/technomancy/ogion)
