@@ -1,6 +1,8 @@
 # nrepl-server
 
-Proof of concept nREPL server. Mostly a port of [ogion](https://gitlab.com/technomancy/ogion).
+Proof of concept nREPL server for something that may end up in
+[babashka](https://github.com/borkdude/babashka/). Mostly a port of
+[ogion](https://gitlab.com/technomancy/ogion).
 
 ## Run
 
