@@ -54,17 +54,23 @@
                    (println "Client closed connection.")))]
     (let [msg (read-msg msg)]
       ;; (when debug? (prn "Received" msg))
-      (cond (= :clone (get msg :op))
-            (do
-              (when debug? (println "Cloning!"))
-              (register-session is os ns msg session-loop))
-            (= :eval (get msg :op)) (do
-                                      (try (eval-msg os msg ns)
-                                           (catch Exception exn
-                                             (send-exception os msg exn)))
-                                      (recur is os id ns))
-            :else (when debug?
-                    (println "Unhandled message" msg))))))
+      (case (get msg :op)
+        :clone (do
+                 (when debug? (println "Cloning!"))
+                 (register-session is os ns msg session-loop))
+        :eval (do
+                (try (eval-msg os msg ns)
+                     (catch Exception exn
+                       (send-exception os msg exn)))
+                (recur is os id ns))
+        :describe (send os (response-for msg {"aux" {}
+                                              "ops" #{"clone", "close", "describe", "eval", "load-file",
+                                                      "ls-sessions", "complete", "stdin", "interrupt"}
+                                              "versions" {"*clojure-version*"
+                                                          (zipmap (map name (keys *clojure-version*))
+                                                                  (vals *clojure-version*))}}))
+        (when debug?
+          (println "Unhandled message" msg))))))
 
 (defn listen [listener]
   (when debug? (println "Listening"))
