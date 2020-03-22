@@ -32,8 +32,9 @@
                (read-string code-str))
         ;; TODO: sci eval
         value (eval code)]
-    (send o (response-for msg {"value" (pr-str value)
-                               "status" #{"done"}}))))
+    (send o (response-for msg {"ns" (ns-name *ns*)
+                               "value" (pr-str value)}))
+    (send o (response-for msg {"status" #{"done"}}))))
 
 (defn register-session [i o ns msg session-loop]
   (let [id (str (java.util.UUID/randomUUID))]
