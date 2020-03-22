@@ -1,6 +1,6 @@
 # nrepl-server
 
-Proof of concept nREPL server. Mostly a port of (ogion)[https://gitlab.com/technomancy/ogion].
+Proof of concept nREPL server. Mostly a port of [ogion](https://gitlab.com/technomancy/ogion).
 
 ## Run
 
