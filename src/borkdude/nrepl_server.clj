@@ -63,12 +63,20 @@
                      (catch Exception exn
                        (send-exception os msg exn)))
                 (recur is os id ns))
-        :describe (send os (response-for msg {"aux" {}
-                                              "ops" #{"clone", "close", "describe", "eval", "load-file",
-                                                      "ls-sessions", "complete", "stdin", "interrupt"}
-                                              "versions" {"*clojure-version*"
-                                                          (zipmap (map name (keys *clojure-version*))
-                                                                  (vals *clojure-version*))}}))
+        :describe
+        (do (send os (response-for msg {"status" #{"done"}
+                                        "aux" {}
+                                        "ops" (zipmap #{"clone", "describe", "eval"}
+                                                      (repeat {}))
+                                        "versions" {"nrepl" {"major" "0"
+                                                             "minor" "4"
+                                                             "incremental" "0"
+                                                             "qualifier" ""}
+                                                    "clojure"
+                                                    {"*clojure-version*"
+                                                     (zipmap (map name (keys *clojure-version*))
+                                                             (vals *clojure-version*))}}}))
+            (recur is os id ns))
         (when debug?
           (println "Unhandled message" msg))))))
 
