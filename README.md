@@ -29,7 +29,7 @@ $ lein repl
 nREPL server started on port 56132 on host 127.0.0.1 - nrepl://127.0.0.1:56132
 ```
 
-From CIDER connect with `cider-connect` and watch the `*nrepl-messages* buffer. See the [CIDER](https://docs.cider.mx/cider/troubleshooting.html#_missing_nrepl_messages_buffer) docs.
+From CIDER connect with `cider-connect` and watch the `*nrepl-messages*` buffer. See the [CIDER](https://docs.cider.mx/cider/troubleshooting.html#_missing_nrepl_messages_buffer) docs.
 
 With Calva:
 
